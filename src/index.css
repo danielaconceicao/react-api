@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.test{
+    width: 20rem;
+    height: 100%;
+}
+
+img{
+    width: 318px;
+    height: 219px;
+}
