@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
+const sendData = {
+  image: '',
+  title: '',
+  content: '',
+  tags: '',
+  published: false,
+}
 
 function App() {
   const [postsData, setPostsData] = useState({})
   //controlar o formulario e garante que os dados sejam enviados corretamente
-  const [formData, setFormData] = useState({
-    image: '',
-    title: '',
-    content: '',
-    tags: '',
-    published: false,
-  })
+  const [formData, setFormData] = useState(sendData)
   
 
 
@@ -49,7 +50,18 @@ function App() {
       })
       .catch(error => console.error('Error:', error));
 
-    setFormData()
+    setFormData(sendData)
+  }
+
+  function handleChange(e) {
+    //console.log(e.target);
+
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+
+    setFormData({
+      ...formData,
+      [e.target.name]: value
+    })
   }
 
   /* function handleEdit() {
@@ -78,7 +90,7 @@ function App() {
               aria-describedby="imagehelper"
               placeholder="/images/1.jpg"
               value={formData.image}
-              /* onChange={handleChange} */ 
+              onChange={handleChange} 
             />
             <small id="imagehelper" className="form-text text-muted"></small>
           </div>
@@ -93,7 +105,7 @@ function App() {
               aria-describedby="titlehelper"
               placeholder="Title blog"
               value={formData.title}
-              /* onChange={handleChange}  */
+              onChange={handleChange} 
             />
             <small id="titlehelper" className="form-text text-muted"></small>
           </div>
@@ -106,7 +118,7 @@ function App() {
               rows="3"
               name='content'
               value={formData.content}
-              /* onChange={handleChange} */
+              onChange={handleChange} 
             />
           </div>
 
@@ -121,7 +133,7 @@ function App() {
               aria-describedby="tagshelper"
               placeholder="Antipasti, Ricette vegetariane, Ricette al forno"
               value={formData.tags}
-              /* onChange={handleChange} */
+              onChange={handleChange} 
             />
             <small id="tagshelper" className="form-text text-muted"></small>
           </div>
@@ -133,7 +145,7 @@ function App() {
               type="checkbox"
               className="form-check-input"
               value={formData.published}
-              /* onChange={handleChange} */
+              onChange={handleChange} 
 
             />
             <label className="form-check-label" htmlFor=""> Published </label>
